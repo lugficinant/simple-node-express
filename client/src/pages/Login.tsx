@@ -26,28 +26,28 @@ const Login = () => {
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
 
+  //login button logic
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault(); // 阻止页面刷新
-    let email = "";
-    let password = "";
-    if (emailRef.current !== null) {
-      email = emailRef.current.value;
-      console.log("Email:", email);
-    }
-    if (passwordRef.current !== null) {
-      password = passwordRef.current?.value;
-      console.log("Password:", password);
-    }
-    const user = usersData.find(
-      (user) => user.email === email && user.password === password
-    );
-    if (user) {
-      console.log("Login Successful");
-
-      // 登录成功后的逻辑，例如跳转页面或更新状态
-    } else {
-      console.log("Login Failed");
-    }
+    console.log("hehe");
+    // let email = "";
+    // let password = "";
+    // if (emailRef.current !== null) {
+    //   email = emailRef.current.value;
+    //   console.log("Email:", email);
+    // }
+    // if (passwordRef.current !== null) {
+    //   password = passwordRef.current?.value;
+    //   console.log("Password:", password);
+    // }
+    // const user = usersData.find(
+    //   (user) => user.email === email && user.password === password
+    // );
+    // if (user) {
+    //   console.log("Login Successful");
+    // } else {
+    //   console.log("Login Failed");
+    // }
   };
 
   return (

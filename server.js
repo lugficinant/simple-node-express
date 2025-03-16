@@ -1,28 +1,41 @@
-const express = require('express');
-const path = require('path');
+//config my server
+// const express = require('express');
+// const path = require('path');
+import { fileURLToPath } from "url";
+import express from "express";
+import path from "path";
+import cors from "cors";
+import useDB from "./data/database.js";
 const app = express();
 const port = 8080;
 
-app.use(express.static(path.join(__dirname, 'client/dist')));
+//link to static file
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+app.use(express.static(path.join(__dirname, "client/dist")));
 
 // 解析请求体
+app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+//initial DB
+useDB.initializeDatabase();
+
+//```````````````````router`````````````````````````
 // 根路径路由，返回简单的登录表单
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'client/dist', 'index.html'));
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "client/dist", "index.html"));
 });
 
-
 // 登录处理路由
-app.post('/login', (req, res) => {
+app.post("/login", (req, res) => {
   const { username, password } = req.body;
 
   // 简单的用户名密码验证
-  if (username === 'admin' && password === 'password') {
+  if (username === "admin" && password === "password") {
     // 登录成功，跳转到成功页面
-    res.redirect('/success');
+    res.redirect("/success");
   } else {
     // 登录失败，返回首页并提示错误
     res.send(`
@@ -33,7 +46,7 @@ app.post('/login', (req, res) => {
 });
 
 // 登录成功页面
-app.get('/success', (req, res) => {
+app.get("/success", (req, res) => {
   res.send(`
     <h1>Login Successful!</h1>
     <p>Welcome to the secret page.</p>
@@ -44,5 +57,3 @@ app.get('/success', (req, res) => {
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);
 });
-
-
