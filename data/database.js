@@ -119,11 +119,13 @@ const useDB = {
     });
   },
 
-  // **关闭数据库**
+  // **close**
   closeDatabase: () => {
-    db.close((err) => {
-      if (err) console.error("关闭数据库失败:", err.message);
-      else console.log("数据库连接已关闭");
+    return new Promise((resolve, reject) => {
+      db.close((err) => {
+        if (err) reject("关闭数据库失败:", err.message);
+        else resolve("数据库连接已关闭");
+      });
     });
   },
 };

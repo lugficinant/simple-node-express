@@ -1,4 +1,5 @@
 //config my server
+//
 // const express = require('express');
 // const path = require('path');
 import { fileURLToPath } from "url";
@@ -14,7 +15,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 app.use(express.static(path.join(__dirname, "client/dist")));
 
-// 解析请求体
+// request
 app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -24,9 +25,9 @@ useDB.initializeDatabase();
 
 //```````````````````router`````````````````````````
 // home
-app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "client/dist", "index.html"));
-});
+// app.get("/", (req, res) => {
+//   res.sendFile(path.join(__dirname, "client/dist", "index.html"));
+// });
 
 //``````````````````````````````````````
 app.post("/test", async (req, res) => {
@@ -48,20 +49,12 @@ app.post("/test", async (req, res) => {
   res.json({ success: true, message: userId });
 });
 
-// 登录成功页面
-app.get("/success", (req, res) => {
-  res.send(`
-    <h1>Login Successful!</h1>
-    <p>Welcome to the secret page.</p>
-  `);
-});
-
 // 启动服务器
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);
 });
 
-//
+// users showcase
 
 try {
   const users = await useDB.getAllUsers();
