@@ -23,26 +23,29 @@ app.use(express.json());
 useDB.initializeDatabase();
 
 //```````````````````router`````````````````````````
-// 根路径路由，返回简单的登录表单
+// home
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "client/dist", "index.html"));
 });
 
-// 登录处理路由
-app.post("/login", (req, res) => {
-  const { username, password } = req.body;
-
-  // 简单的用户名密码验证
-  if (username === "admin" && password === "password") {
-    // 登录成功，跳转到成功页面
-    res.redirect("/success");
-  } else {
-    // 登录失败，返回首页并提示错误
-    res.send(`
-      <h1>Invalid credentials, please try again.</h1>
-      <a href="/">Back to Login</a>
-    `);
+//``````````````````````````````````````
+app.post("/test", async (req, res) => {
+  const { email, password } = req.body;
+  console.log("``````````login request``````````");
+  console.log("Received login request  from user :", email, password);
+  console.log("POST request received");
+  let userId = null;
+  //validation
+  try {
+    userId = await useDB.getUserByEmailAndPassword(email, password);
+    userId
+      ? console.log("here you are MY USER😘😘:", userId)
+      : console.log("sry we didnt find you in database 😒😒");
+  } catch (err) {
+    console.error("Insert error:", err);
   }
+
+  res.json({ success: true, message: userId });
 });
 
 // 登录成功页面
@@ -57,3 +60,12 @@ app.get("/success", (req, res) => {
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);
 });
+
+//
+
+try {
+  const users = await useDB.getAllUsers();
+  console.log("All Users:", users);
+} catch (err) {
+  console.error("Error fetching users:", err);
+}

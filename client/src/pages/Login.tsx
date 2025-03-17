@@ -1,4 +1,6 @@
 import { useRef } from "react";
+import { useNavigate } from "react-router-dom";
+import { toServer } from "../services/api";
 
 //
 import {
@@ -14,8 +16,7 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 //
-import usersData from "../../../data/users.json";
-//
+
 //
 
 const Login = () => {
@@ -26,28 +27,29 @@ const Login = () => {
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
 
+  //nevigate
+  const navigate = useNavigate();
+
   //login button logic
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault(); // 阻止页面刷新
-    console.log("hehe");
-    // let email = "";
-    // let password = "";
-    // if (emailRef.current !== null) {
-    //   email = emailRef.current.value;
-    //   console.log("Email:", email);
-    // }
-    // if (passwordRef.current !== null) {
-    //   password = passwordRef.current?.value;
-    //   console.log("Password:", password);
-    // }
-    // const user = usersData.find(
-    //   (user) => user.email === email && user.password === password
-    // );
-    // if (user) {
-    //   console.log("Login Successful");
-    // } else {
-    //   console.log("Login Failed");
-    // }
+    console.log("clicked login");
+    const email = emailRef.current?.value || "";
+    const password = passwordRef.current?.value || "";
+
+    console.log("your input 😎😎", "Email:", email, "Password:", password);
+    console.log("lets check your input~~🤣");
+    try {
+      const response = await toServer.testPost(email, password); // 等待 Promise 完成
+      if (response.success) {
+        console.log("Login successful 😘, user ID:", response.message);
+        navigate("/home");
+      } else {
+        alert("Invalid credentials 😒");
+      }
+    } catch (err) {
+      console.error(" 😂 Login failed:", err);
+    }
   };
 
   return (
