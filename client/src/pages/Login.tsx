@@ -41,7 +41,7 @@ const Login = () => {
     console.log("lets check your input~~🤣");
     try {
       const response = await toServer.testPost(email, password); // 等待 Promise 完成
-      if (response.success) {
+      if (response.success && response.message) {
         console.log("Login successful 😘, user ID:", response.message);
         navigate("/home");
       } else {

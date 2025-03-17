@@ -1,5 +1,4 @@
 //react router
-import React from "react";
 
 //
 // BrowserRouter 👉 负责管理页面路由，它是所有路由的“容器”。
@@ -9,14 +8,14 @@ import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 //pages
 import Login from "./pages/Login";
-import Home from "./pages/Home";
-
+// import Home from "./pages/Home";
+import Hub from "./Hub";
 const App = () => {
   return (
     <Router>
       <Routes>
         <Route path="/" element={<Login />} />
-        <Route path="/home" element={<Home />} />
+        <Route path="/home" element={<Hub />} />
       </Routes>
     </Router>
   );
