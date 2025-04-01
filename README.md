@@ -1,6 +1,6 @@
 # This is a Mini Full-Stack website GameHub 
 
-go to AWS : http://game-name-lucan.s3-website-ap-southeast-2.amazonaws.com
+AWS : http://game-name-lucan.s3-website-ap-southeast-2.amazonaws.com
 
 # Frontend-Backend Separation React/Node/SQLite
 
