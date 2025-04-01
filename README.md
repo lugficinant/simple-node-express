@@ -1,12 +1,10 @@
-# This is a Mini Full-Stack website GameHub
+# This is a Mini Full-Stack website GameHub 
 
-# Cloud deployment in progress 👌
+go to AWS : http://game-name-lucan.s3-website-ap-southeast-2.amazonaws.com
 
 # Frontend-Backend Separation React/Node/SQLite
 
-# To start Frontend: cd client then npm i / npm run dev
 
-# To start Backend: cd root(simple-node-express) then npm i / node server.js
 
 # plz use Email : test@example.com Password: 123 to login
 
